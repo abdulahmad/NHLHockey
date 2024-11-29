@@ -12,6 +12,7 @@ This project contains tools for compiling NHL Hockey for the Sega Genesis using 
 ```
 Root/
 ├── assembler/            # Assembler (Windows Only)
+├── notebooks/            # Jyputer Notebooks for Additional Tooling (Not Required)
 ├── output/               # Build output
 ├── src/                  # Source assembly files and assets
 │   ├── _docs/              # Documentation files
@@ -58,3 +59,7 @@ docker run --rm \
     ├── nhl92.lst             # Debug information generated during the build.
     └── nhl92.map             # Symbol file used for debugging.
 ```
+
+## Developer Info
+
+1. TBD: The wiki will be updated with additional findings, including detailed instructions on using the notebooks.
