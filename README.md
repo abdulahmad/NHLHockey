@@ -12,7 +12,7 @@ This project contains tools for compiling NHL Hockey for the Sega Genesis using 
 ```
 Root/
 ├── assembler/            # Assembler (Windows Only)
-├── notebooks/            # Jyputer Notebooks for Additional Tooling (Not Required)
+├── notebooks/            # Jupyter Notebooks for Additional Tooling (Not Required)
 ├── output/               # Build output
 ├── src/                  # Source assembly files and assets
 │   ├── _docs/              # Documentation files
