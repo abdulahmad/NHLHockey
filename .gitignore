@@ -19,3 +19,7 @@ Thumbs.db
 # Virtual Environment for Python Notebooks
 venv/
 .venv/
+
+#Emulator Files
+Gens.cfg    
+language.dat

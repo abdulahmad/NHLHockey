@@ -150,6 +150,21 @@
                 "reveal": "always",
                 "panel": "shared"
             }
+        },
+        {
+            "label": "Build & Launch Gens Emulator",
+            "type": "process",
+            "command": "C:\\_Personal\\NHL94Sandbox\\GENS\\r57shell Mod\\gens.exe",
+            "args": [
+                "${workspaceFolder}\\output\\nhl92.bin"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "dependsOn": "Build NHL 92",
+            "dependsOrder": "sequence"
         }
     ]
 }
