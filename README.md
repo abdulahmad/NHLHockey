@@ -51,7 +51,7 @@ docker run --rm \
     /p /m /g /o d- /o s- /o r+ /o l+ /o l. /o ow+ /o op- /o os+ /o oz+ /o omq- /o oaq+ /o osq+ \
     "hockey.asm,/output/nhl92.bin,/output/nhl92,/output/nhl92" > output/build.log 2>&1
 ```
-5. Results.
+## Output
 ```
     output/
     ├── Build.log             # Log file containing any errors during compilation.
