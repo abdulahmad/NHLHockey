@@ -18,10 +18,10 @@ Root/
 │   ├── _docs/              # Documentation files
 │   ├── graphics/           # Graphic assets
 │   ├── macros/             # Assembly macros
-│   ├── sega/               # Sega-specific code
+│   ├── sega/               # Sega-init code
 │   ├── sound/              # Sound assets
 │   └── *.asm               # Assembly files
-├── build.bat             # Batch File for Invoking Assembler to Compile Source Code
+└── build.bat             # Batch File for Invoking Assembler to Compile Source Code
 ```
 
 ## Building (Windows)
