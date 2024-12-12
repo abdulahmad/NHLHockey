@@ -27,14 +27,7 @@ Root/
 ## Building (Windows)
 
 1. Run the build.bat file from the command prompt or terminal.
-2. Batch file should generate the following files in the `output` folder:
-```
-    output/
-    ├── Build.log             # Log file containing any errors during compilation.
-    ├── nhl92.bin             # ROM file if the build was successful without errors.
-    ├── nhl92.lst             # Debug information generated during the build.
-    └── nhl92.map             # Symbol file used for debugging.
-```
+2. Batch file should generate files in the `output` folder
 
 ## Building (Mac or Linux)
 
