@@ -55,4 +55,4 @@ docker run --rm \
 
 ## Developer Info
 
-1. TBD: The wiki will be updated with additional findings, including detailed instructions on using the notebooks.
+1. For more detailed development information, please refer to the [wiki](https://github.com/Mhopkinsinc/NHLHockey/wiki).
