@@ -23,3 +23,5 @@ venv/
 #Emulator Files
 Gens.cfg    
 language.dat
+*.srm
+*.gs*
