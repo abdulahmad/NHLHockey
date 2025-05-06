@@ -5,6 +5,9 @@ output/*.*
 
 # Extracted Data from Notebook Tooling
 extracted_data/
+_archived/
+animations/
+frames_output/
 
 # IDE
 *.swp

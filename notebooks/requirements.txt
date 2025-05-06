@@ -29,3 +29,6 @@ pylint
 
 # Open source computer vision and machine learning software library
 opencv-python>=4.8.0
+
+#Image Tools:
+imageio
