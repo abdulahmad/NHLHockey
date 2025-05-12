@@ -1,0 +1,261 @@
+OK. I have the source for of NHL Hockey for Sega Genesis building. Its compiled using the ASM68k compiler.
+
+I want to figure out the differences between my build and the retail build and eliminate the differences so that my build is the same as the retail build.
+
+Here is the build.bat I used:
+@echo off
+setlocal
+
+REM Get the directory of this batch file
+set workspaceFolder=%~dp0
+
+REM Create the output directory
+if not exist "%workspaceFolder%\output" (
+    mkdir "%workspaceFolder%\output"
+)
+
+REM Change to the workspace src directory
+cd /d "%workspaceFolder%\src"
+
+REM Run the command with the workspace folder
+%workspaceFolder%assembler\Assembler.exe /p /m /g /o d- /o s- /o r+ /o l+ /o l. /o ow+ /o op- /o os+ /o oz+ /o omq- /o oaq+ /o osq+ "%workspaceFolder%src\hockey.asm,%workspaceFolder%output\nhl92.bin,%workspaceFolder%output\nhl92,%workspaceFolder%output\nhl92" > "%workspaceFolder%output\Build.log"
+
+endlocal
+
+Here is the start of hockey.asm:
+
+	include	Main.Asm		;EA provided code for startup and EA logo
+	include	TeamData.Asm
+	include	Frames.Asm		;graphics data table for Sprites.anim
+	include	Ram.Asm			;ram allocation and some equates	
+
+Begin		
+	move	#$2700,SR	
+	move.l	#Stack,sp	
+	move.l	#varstart,a0	;clear out ram
+.0	clr.l	(a0)+
+	cmp.l	#varend2,a0
+	blt	.0	
+
+	jsr	ResetPassWord	
+	jsr	DefaultMenus		;set initial menu choices
+	jsr	orjoy				;clear any previous button presses
+	jsr	p_initialZ80		;sound stuff
+	jsr	p_turnoff			;sound stuff
+	jsr	p_music_vblank		;sound stuff
+	jsr	KillCrowd	
+	jmp	Opening				;goto title screen and options etc.
+;----------------------------------------------------
+
+StartGame
+	clr.b	gmode
+	cmp	#1,OptPen
+	bne	.0
+	bset	#gmoffs,gmode	;offsides pen. is active
+.0
+	jsr	setteams
+	clr	gsp
+	bsr	restoreteams
+	bsr	InitScores
+	bsr	UpdateScores
+	bra	StartPer
+
+restoreteams
+	move	#tmstruct,a2	;team 1
+	bsr	.r
+	add	#tmsize,a2	;team 2
+.r	move	#6,tmap(a2)	;no players in pen. box
+	moveq	#(MaxRos-1)*2,d0
+.0	move	#-2,tmpdst(a2,d0)	;all players on bench
+	subq	#2,d0
+	bpl	.0
+	rts
+
+Here is Main.asm:
+	include	macros\genesis.mac
+
+;	68000
+;	ABSOLUTE
+;	A4OFF
+;	llchar	'.'	; Change the local label character to '.'.
+;	mlchar	'@'	; Change the macro label character to '@'.
+
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;
+;	Imports and exports
+;
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+RAMStart = $FF0000	
+	
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;
+;	Equates
+;
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Stack = $FFFFF6	
+
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;
+;	Vectors
+;
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+;;	.region code
+	org	0
+	dc.l	Stack		; 0 initial stack pointer
+	dc.l	Start		; 4 initial program counter
+	dc.l	BusError
+	dc.l	AddError
+	dc.l	Illinst
+	dc.l	Zerodiv
+
+	org     $18
+    dcb.b   72,$FF      ; $5E - $18 = 70 bytes
+
+	org	$60
+	dc.l	Spurious	; level 0-3 interrupts are not implemented.
+	dc.l	Spurious	; level 0-3 interrupts are not implemented.
+	dc.l	Spurious	; level 0-3 interrupts are not implemented.
+	dc.l	Spurious	; level 0-3 interrupts are not implemented.
+	dc.l	HBlank		; level 4: horizontal retrace.
+	dc.l	0			; level 5: not used.
+	dc.l	VBjsr		; level 6: vertical retrace.
+	dc.l	Spurious	;
+
+	org     $90
+    dcb.b   112,$FF      ; $5E - $18 = 70 bytes
+
+ErrorStatus
+	dc.l	0,0,0,0
+
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;
+;	Start
+;
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+	org	$100
+
+	include	sega\SegaIDTable.asm
+Start
+	Include	sega\SegaInit.asm
+	nop
+	nop
+	nop
+	incbin Graphics\EALogo.bin
+
+	bra	Begin
+
+HBlank:
+Spurious	
+	rte
+
+Here is genesis.mac:
+VmInc MACRO ;set video auto inc. mode
+	move	#$8f00+(\1&255),Vctrl
+	ENDM
+
+String  MACRO
+        ; Store current position
+@begin1  =   *
+        ; Reserve space for length word
+        dc.w    0
+        ; Output the string bytes
+        dc.b    \1     ; first param
+    IF NARG>1
+        dc.b    \2     ; second param
+    ENDIF
+    IF NARG>2
+        dc.b    \3     ; third param
+    ENDIF
+    IF NARG>3
+        dc.b    \4     ; fourth param
+    ENDIF
+    IF NARG>4
+        dc.b    \5     ; fifth param
+    ENDIF
+    IF NARG>5
+        dc.b    \6     ; sixth param
+    ENDIF
+    IF NARG>6
+        dc.b    \7     ; seventh param
+    ENDIF
+    IF NARG>7
+        dc.b    \8     ; eighth param
+    ENDIF
+    IF NARG>8
+        dc.b    \9     ; ninth param
+    ENDIF
+    IF NARG>9
+        dc.b    \10    ; tenth param
+    ENDIF
+    IF NARG>10
+        dc.b    \11    ; eleventh param
+    ENDIF
+    IF NARG>11
+        dc.b    \12    ; twelfth param
+    ENDIF
+    IF NARG>12
+        dc.b    \13    ; thirteenth param
+    ENDIF
+    IF NARG>13
+        dc.b    \14    ; fourteenth param
+    ENDIF
+    IF NARG>14
+        dc.b    \15    ; fifteenth param
+    ENDIF
+        ; Pad with zero if needed for word alignment
+    IF *&1
+        dc.b    0
+    ENDIF
+@end1    =   *
+        ; Now write the length at the reserved position
+        org     @begin1
+        dc.w    @end1-@begin1  ; Total length
+        org     @end1
+    ENDM
+
+HEX2 MACRO    ; macro for hex data
+    dc.w    $\1,$\2,$\3,$\4     ; handle 4 words at a time, add $ prefix
+    ENDM
+
+; PIX macro for
+PIX     MACRO
+        ; First parameter
+        IF      \1=1111
+            dc.b    $55
+        ELSEIF  \1=2131
+            dc.b    $9D
+        ELSEIF  \1=3111
+            dc.b    $D5
+        ENDIF
+
+        ; Second parameter if present
+        IF      NARG>1
+            IF      \2=1111
+                dc.b    $55
+            ELSEIF  \2=2131
+                dc.b    $9D
+            ELSEIF  \2=3300
+                dc.b    $F0
+            ELSEIF  \2=1311
+                dc.b    $75
+            ENDIF
+        ENDIF
+
+        ; Third parameter if present
+        IF      NARG>2
+            IF      \3=1213
+                dc.b    $67
+            ENDIF
+        ENDIF
+    ENDM
+
+Here is the start of the retail rom in hex:
+00FFFFF6000002000000F3B00000F3D20000F3F80000F4220000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000116A0000116A0000116A0000116A00001168000000000000D6E60000116A0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000534547412047454E4553495320202020
+
+Here is the start of my built rom from the source code in hex:
+00FFFFF6000002000000F3CC0000F3EE0000F4140000F43EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000116800001168000011680000116800001168000000000000D6CA0000116800000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF534547412047454E4553495320202020
+
+Can you tell me why the start of the retail rom is different and how do I make it the same as retail? If there's more info needed, please let me know.

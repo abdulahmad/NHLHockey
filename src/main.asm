@@ -37,7 +37,7 @@ Stack = $FFFFF6
 	dc.l	Zerodiv
 
 	org     $18
-    dcb.b   72,$FF      ; $5E - $18 = 70 bytes
+    dcb.b   72,$00      ; $5E - $18 = 70 bytes
 
 	org	$60
 	dc.l	Spurious	; level 0-3 interrupts are not implemented.
@@ -50,7 +50,7 @@ Stack = $FFFFF6
 	dc.l	Spurious	;
 
 	org     $90
-    dcb.b   112,$FF      ; $5E - $18 = 70 bytes
+    dcb.b   112,$00      ; $5E - $18 = 70 bytes
 
 ErrorStatus
 	dc.l	0,0,0,0
