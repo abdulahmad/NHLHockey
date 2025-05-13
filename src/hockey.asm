@@ -670,6 +670,7 @@ suba4	;a4 = address in replay buffer of current frame
 	cmp.l	#replaystart,a4
 	bne	.1
 	btst	#sfwrap,sflags
+	dc.b $66, $00, $3E, $CA, $60, $00, $3E, $A8, $42, $47, $B9, $FC, $FF, $FF, $00, $00, $66, $00, $00, $12, $08, $38, $00, $04, $D8, $16
 	beq	rtss
 	move.l	#replayend,a4
 .1
