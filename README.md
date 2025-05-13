@@ -56,3 +56,17 @@ docker run --rm \
 ## Developer Info
 
 1. For more detailed development information, please refer to the [wiki](https://github.com/Mhopkinsinc/NHLHockey/wiki).
+
+
+Code is aligned up to D70 - EALogo
+1164 - still aligned
+1168 -- aligned
+116a - extra 4e73
+11CA - misaligned
+11D6 - misaligned
+1200 - misaligned
+138C - misaligned
+15B5 - misaligned-- retail has 2 more bytes
+1A06 - misaligned-- retail has 2 more bytes
+22D2 - misaligned-- retail has 2 more bytes
+3FF2 - misaligned-- retail has 2 more bytes
