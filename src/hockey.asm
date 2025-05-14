@@ -4487,6 +4487,7 @@ setoptions
 	bsr	.ps
 	move	#24,palcount
 	bsr	forcefade
+	move.l #vb2,vbint
 	bclr	#dfng,disflags	;fade in graphics now
 ;----------
 .top	;loop wait for input
