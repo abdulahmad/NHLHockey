@@ -1335,7 +1335,7 @@ Credits
 	String	-1
 
 	String	'Special Thanks to'
-	String	'Mark Hughes and Scooter Henson'
+	String	'Mark Hughes and Scooter Hanson'
 	String	'of the San Diego Gulls'
 
 	String	''

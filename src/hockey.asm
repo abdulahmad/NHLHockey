@@ -10,8 +10,7 @@ Begin
 	move.l	#varstart,a0	;clear out ram
 .0	clr.l	(a0)+
 	cmp.l	#varend2,a0
-	blt	.0	
-
+	blt	.0
 	jsr	ResetPassWord	
 	jsr	DefaultMenus		;set initial menu choices
 	jsr	orjoy				;clear any previous button presses
@@ -19,6 +18,13 @@ Begin
 	jsr	p_turnoff			;sound stuff
 	jsr	p_music_vblank		;sound stuff
 	jsr	KillCrowd	
+	move	#$2700,SR	
+	move.l	#Stack,sp	
+	move.l	#varstart,a0	;clear out ram
+
+.1	clr.l	(a0)+
+	cmp.l	#varend2,a0
+	blt	.1
 	jmp	Opening				;goto title screen and options etc.
 ;----------------------------------------------------
 
@@ -670,7 +676,6 @@ suba4	;a4 = address in replay buffer of current frame
 	cmp.l	#replaystart,a4
 	bne	.1
 	btst	#sfwrap,sflags
-	dc.b $66, $00, $3E, $CA, $60, $00, $3E, $A8, $42, $47, $B9, $FC, $FF, $FF, $00, $00, $66, $00, $00, $12, $08, $38, $00, $04, $D8, $16
 	beq	rtss
 	move.l	#replayend,a4
 .1
@@ -4391,9 +4396,9 @@ TitleScreen
 
 setoptions
 	;options screen display and input
-	move	#$2500,sr
-	move.l	#vb2,vbint
+	; move	#$2500,sr
 	bset	#dfng,disflags
+	move.l	#vb2,vbint
 	bclr	#df32c,disflags
 	move	#$0000,VSCRLPM
 	move	#$b400,VSPRITES
