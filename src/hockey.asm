@@ -3541,17 +3541,17 @@ GameOver
 	bra	Opening4
 
 Opening	
-	bsr	KillCrowd	
+	; bsr	KillCrowd	AA TEST
 	bsr	TitleScreen	
 
-Opening2	move	#$2700,SR
-	move	#Stack,sp
-	move	#varstart,a0
-.0	clr.l	(a0)+
-	cmp	#varend,a0
-	blt	.0
-	move.l	#vb2,vbint
-	move	#$2500,sr
+Opening2	;move	#$2700,SR
+	move.l	#Stack,sp
+; 	move	#varstart,a0 AA TEST
+; .0	clr.l	(a0)+
+; 	cmp	#varend,a0
+; 	blt	.0
+; 	move.l	#vb2,vbint
+; 	move	#$2500,sr
 	bsr	setoptions
 Opening3	bsr	PlayoffScreen
 Opening4	bsr	ScoutingReport
