@@ -5185,8 +5185,8 @@ EncodePW	;after playoff game compute winners and password if needed
 	bpl	.nofail	;player 1 won
 	cmp	#2,POJoy
 	blt	.userfailed	;one player or teammates
-	cmp	#1,gamelevel
-	bne	.userfailed
+	; cmp	#1,gamelevel AA TEST added to Rev A
+	; bne	.userfailed AA TEST added to Rev A
 	eor	#1,POTreeTeam	;switch teams if 2 player playoffs and cont 2 won first game
 	eor	#1,POJoy
 .nofail
