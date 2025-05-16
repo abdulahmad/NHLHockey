@@ -5447,10 +5447,10 @@ ResolveGames	;compute winners and losers for playoff matchups
 	clr	gspobwins(a0)
 	sub	#gssize,a0
 	dbf	d1,.nr0
-	moveq	#1,d1
-	asl	d2,d1
-	sub	#1,d1
-	and	d1,WinBits
+	; moveq	#1,d1 AA TEST Rev A adds this
+	; asl	d2,d1
+	; sub	#1,d1
+	; and	d1,WinBits
 	asl	d2,d3
 	or	d3,WinBits
 	add	#1,gamelevel
@@ -5467,10 +5467,10 @@ ResolveGames	;compute winners and losers for playoff matchups
 	bchg	d1,d3
 .nb2	sub	#gssize,a0
 	dbf	d1,.nb0
-	moveq	#1,d1
-	asl	d2,d1
-	sub	#1,d1
-	and	d1,WinBits
+	; moveq	#1,d1 AA TEST Rev A adds this
+	; asl	d2,d1
+	; sub	#1,d1
+	; and	d1,WinBits
 	asl	d2,d3
 	or	d3,WinBits
 	add	#1,gamelevel
