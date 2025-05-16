@@ -9,7 +9,7 @@
 	dc.b	'                '	; 		$160
 	dc.b	'                '	; 		$170
 	dc.b	'GM T-50236 -00'	; 05	$180	cartridge cat., product no., version no. (14 bytes)
-	dc.w	$0000				; 06	$18E	check sum data (installed by checsum program) (2 bytes)
+	dc.w	$93B8				; 06	$18E	check sum data (installed by checsum program) (2 bytes)
 	dc.b	'J               '	; 07	$190	I/O peripheral info. (J=Control Pad) (16 bytes)
 	dc.l	$00000000,$0007FFFF	; 08	$1A0	cartridge size (start and end address) (16 bytes)
 	dc.l	$00FF0000,$00FFFFFF	; 09	$1A8	RAM size (start and end address) (16 bytes)

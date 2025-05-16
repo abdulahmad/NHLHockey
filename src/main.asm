@@ -73,7 +73,7 @@ Start
 
 	bra	Begin
 
-HBlank:
-Spurious	
+HBlank:	
 	rte
+Spurious:
 	rte

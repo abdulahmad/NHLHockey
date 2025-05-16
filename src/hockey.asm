@@ -5657,6 +5657,10 @@ Stanleymap
 EASNmap
 	incbin Graphics\EASN.map.jim
 	even
+	
+	include checksum.asm
+
+	dcb.b   0x124,$FF
 endofcart
    	end
 
