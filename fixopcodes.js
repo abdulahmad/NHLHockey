@@ -58,7 +58,7 @@ async function parseListingFile(lstFilePath) {
                 // Create regex for this instruction
                 // Matches: 8-digit address, opcode, operand bytes, instruction, any operands, optional comment
                 const regex = new RegExp(
-                    `^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})(?:\\s+([0-9A-Fa-f]{4}))?\\s+${instruction}\\s+[^;]*\\s*(?:;.*)?$`,
+                    `^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})(?:\\s+([0-9A-Fa-f]{4})(?:\\s+([0-9A-Fa-f]{4}))?)?\\s+(${instruction})\\s+([^;]*)\\s*(;.*)?$`,
                     'i'
                 );
 
