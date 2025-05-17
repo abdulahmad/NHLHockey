@@ -15,28 +15,28 @@ const opcodeReplacements = [
     },
     {
         instruction: 'cmp',
-        existingOpcode: '0C40',
+        existingOpcode: '0C40', // cmp #<immediate>,d0
         newOpcode: 'B07C'
     },
     {
         instruction: 'cmp',
-        existingOpcode: '0C41',
-        newOpcode: 'B27C'
+        existingOpcode: '0C41', // cmp #<immediate>,d1
+        newOpcode: 'B27C'      // cmp #<immediate>,d7
     },
     {
-        instruction: 'ecg',
-        existingOpcode: 'C34A',
-        newOpcode: 'C549'
+        instruction: 'exg',     // Corrected from 'ecg' to 'exg'
+        existingOpcode: 'C34A', // exg d0,d2 (example; verify)
+        newOpcode: 'C549'      // exg d1,d2 (example; verify)
     },
     {
         instruction: 'cmpi.l',
-        existingOpcode: '0C80',
-        newOpcode: 'B0BC'
+        existingOpcode: '0C80', // cmpi.l #$<immediate>,d0
+        newOpcode: 'B0BC'      // cmpi.l #$<immediate>,d7
     },
     {
         instruction: 'cmp',
-        existingOpcode: '0C42',
-        newOpcode: 'B47C'
+        existingOpcode: '0C42', // cmp #<immediate>,d2
+        newOpcode: 'B47C'      // cmp #<immediate>,d7
     },
     // Add more entries as needed
 ];
@@ -45,18 +45,15 @@ const opcodeReplacements = [
 async function parseListingFile(lstFilePath) {
     try {
         const data = await fs.readFile(lstFilePath, 'utf8');
-        const lines = data.split('\n');
+        const lines = data.split('\n').map(line => line.trimEnd()); // Remove \r and \n
         const matches = []; // Array of { offset, newOpcode }
 
         for (const line of lines) {
             for (const { instruction, existingOpcode, newOpcode } of opcodeReplacements) {
                 // Create regex for this instruction
                 // Matches: 8-digit address, opcode, operand bytes, instruction, any operands, optional comment
-                // ^([0-9A-Fa-f]{8})\s([0-9A-Fa-f]{4})(?:\s[0-9]{4})*\s+([a-zA-z.]+)\s.+$
-                // ^([0-9A-Fa-f]{8})\\s([0-9A-Fa-f]{4})(?:\\s[0-9]{4})*\\s+(${instruction})\\s.+$
-                // working: ^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})\\s+([0-9A-Fa-f]{4})(?:\\s+[0-9A-Fa-f]{0,})?\\s*${instruction}\\s+[^;]+(?:;.*)?$
                 const regex = new RegExp(
-                    `^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})\\s+([0-9A-Fa-f]{4})(?:\\s+[0-9A-Fa-f]{0,})?\\s*${instruction}\\s+[^;]+(?:;.*)?$`,
+                    `^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})\\s+([0-9A-Fa-f]{4})\\s+${instruction}\\s+[^;]*\\s*(?:;.*)?$`,
                     'i'
                 );
 
@@ -70,6 +67,24 @@ async function parseListingFile(lstFilePath) {
                             `Matched ${instruction} at offset 0x${offset.toString(16).padStart(8, '0').toUpperCase()} with opcode ${opcode}`
                         );
                     }
+                } else if (line.includes(existingOpcode.toUpperCase()) || line.includes(existingOpcode.toLowerCase())) {
+                    // Debug: Log failed matches with raw line and hex dump
+                    const rawLine = line.replace(/\t/g, '\\t').replace(/\r/g, '\\r').replace(/\n/g, '\\n');
+                    console.log(
+                        `DEBUG: Failed to match ${instruction} with opcode ${existingOpcode} on line: "${rawLine}"`
+                    );
+                    // Hex dump of the line
+                    const hexDump = Buffer.from(line).toString('hex').match(/.{1,2}/g).join(' ');
+                    console.log(`DEBUG: Hex dump: ${hexDump}`);
+                    // Test regex to capture groups
+                    const testRegex = new RegExp(
+                        `^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})\\s+([0-9A-Fa-f]{4})\\s+(${instruction})\\s+([^;]*)\\s*(;.*)?$`,
+                        'i'
+                    );
+                    const testMatch = line.match(testRegex);
+                    console.log(
+                        `DEBUG: Test regex groups: ${testMatch ? JSON.stringify(testMatch) : 'No match'}`
+                    );
                 }
             }
         }
