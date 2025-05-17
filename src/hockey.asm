@@ -23,7 +23,7 @@ Begin
 	move.l	#varstart,a0	;clear out ram
 
 .1	clr.l	(a0)+
-	cmp.l	#varend2,a0
+	cmp.l	#varend,a0 ; AA TEST Rev A change
 	blt	.1
 	jmp	Opening				;goto title screen and options etc.
 ;----------------------------------------------------
@@ -186,7 +186,7 @@ updatecrowdf	;this is called every game loop with d7 = elapsed frames
 	bpl	.cf
 	move	crowdlevel,d0
 	lsr	#1,d0
-	cmp #127,d0
+	cmp.w #$007F,d0
 	bls	.1
 	moveq	#127,d0
 .1	and	#%01100000,d0

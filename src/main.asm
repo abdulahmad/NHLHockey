@@ -66,9 +66,7 @@ ErrorStatus
 	include	sega\SegaIDTable.asm
 Start
 	Include	sega\SegaInit.asm
-	nop
-	nop
-	nop
+	jsr ValidationRoutine
 	incbin Graphics\EALogo.bin
 
 	bra	Begin
