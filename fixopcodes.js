@@ -34,6 +34,11 @@ const opcodeReplacements = [
         newOpcode: 'B0BC'      // cmpi.l #$<immediate>,d7
     },
     {
+        instruction: 'cmpi.l',
+        existingOpcode: '0C81', // cmpi.l #$<immediate>,d0
+        newOpcode: 'B2BC'      // cmpi.l #$<immediate>,d7
+    },
+    {
         instruction: 'cmp',
         existingOpcode: '0C42', // cmp #<immediate>,d2
         newOpcode: 'B47C'      // cmp #<immediate>,d7
@@ -58,7 +63,7 @@ async function parseListingFile(lstFilePath) {
                 // Create regex for this instruction
                 // Matches: 8-digit address, opcode, operand bytes, instruction, any operands, optional comment
                 const regex = new RegExp(
-                    `^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})(?:\\s+([0-9A-Fa-f]{4})(?:\\s+([0-9A-Fa-f]{4}))?)?\\s+(${instruction})\\s+([^;]*)\\s*(;.*)?$`,
+                    `^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})(?:\\s+([0-9A-Fa-f]{4})(?:\\s+([0-9A-Fa-f]{4}))?)?(?:\\s+([^\\t\\s;]*))?\\s+(${instruction})\\s+([^;]*)\\s*(;.*)?$`,
                     'i'
                 );
 
