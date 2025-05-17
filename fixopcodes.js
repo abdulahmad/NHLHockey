@@ -38,6 +38,11 @@ const opcodeReplacements = [
         existingOpcode: '0C42', // cmp #<immediate>,d2
         newOpcode: 'B47C'      // cmp #<immediate>,d7
     },
+    {
+        instruction: 'cmp',
+        existingOpcode: '0C43', // cmp #<immediate>,d2
+        newOpcode: 'B67C'      // cmp #<immediate>,d7
+    },
     // Add more entries as needed
 ];
 
