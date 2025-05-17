@@ -6,31 +6,19 @@ const opcodeReplacements = [
     {
         instruction: 'cmp.w',
         existingOpcode: '0C40', // cmp.w #$<immediate>,d0
-        newOpcode: 'B07C'     // cmp.w #$<immediate>,d7
+        newOpcode: 'B07C'      // cmp.w #$<immediate>,d7
     },
     {
         instruction: 'cmpi.w',
-        existingOpcode: '0C40', // cmp.w #$<immediate>,d0
-        newOpcode: 'B07C'     // cmp.w #$<immediate>,d7
+        existingOpcode: '0C40', // cmpi.w #$<immediate>,d0
+        newOpcode: 'B07C'      // cmpi.w #$<immediate>,d7
     },
     {
         instruction: 'cmp',
-        existingOpcode: '0C40', // cmp.w #$<immediate>,d0
-        newOpcode: 'B07C'     // cmp.w #$<immediate>,d7
+        existingOpcode: '0C40', // cmp #<immediate>,d0
+        newOpcode: 'B07C'      // cmp #<immediate>,d7
     },
-    // Add more entries as needed, e.g.:
-    /*
-    {
-      instruction: 'move.w',
-      existingOpcode: '3040', // move.w d0,d0
-      newOpcode: '3140'      // move.w d0,d1
-    },
-    {
-      instruction: 'add.w',
-      existingOpcode: 'D040', // add.w d0,d0
-      newOpcode: 'D142'      // add.w d1,d2
-    }
-    */
+    // Add more entries as needed
 ];
 
 // Function to parse the .lst file and find instructions matching the replacement table
@@ -43,9 +31,12 @@ async function parseListingFile(lstFilePath) {
         for (const line of lines) {
             for (const { instruction, existingOpcode, newOpcode } of opcodeReplacements) {
                 // Create regex for this instruction
-                // Matches: 8-digit address, opcode, optional operand bytes, instruction, any operands, optional comment
+                // Matches: 8-digit address, opcode, operand bytes, instruction, any operands, optional comment
+                // ^([0-9A-Fa-f]{8})\s([0-9A-Fa-f]{4})(?:\s[0-9]{4})*\s+([a-zA-z.]+)\s.+$
+                // ^([0-9A-Fa-f]{8})\\s([0-9A-Fa-f]{4})(?:\\s[0-9]{4})*\\s+(${instruction})\\s.+$
+                // working: ^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})\\s+([0-9A-Fa-f]{4})(?:\\s+[0-9A-Fa-f]{0,})?\\s*${instruction}\\s+[^;]+(?:;.*)?$
                 const regex = new RegExp(
-                    `^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})(?:\\s+[0-9A-Fa-f]{0,})?\\s+${instruction}\\s+[^;]*(?:;.*)?$`,
+                    `^\\s*([0-9A-Fa-f]{8})\\s+([0-9A-Fa-f]{4})\\s+([0-9A-Fa-f]{4})(?:\\s+[0-9A-Fa-f]{0,})?\\s*${instruction}\\s+[^;]+(?:;.*)?$`,
                     'i'
                 );
 
