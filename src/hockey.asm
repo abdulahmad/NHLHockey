@@ -458,7 +458,8 @@ Pausemode	;game is in pause mode now
 	addq.w	#2,a7
 	rts
 
-.gnum	cmp	#3,d0	;print goalie number or none /d0 = menu item
+.gnum	
+	cmp	#3,d0	;print goalie number or none /d0 = menu item
 	bne	rtss
 	move.l	a1,-(a7)
 	sub	#6,printx

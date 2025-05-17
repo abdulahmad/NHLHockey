@@ -8,6 +8,16 @@ const opcodeReplacements = [
         existingOpcode: '0C40', // cmp.w #$<immediate>,d0
         newOpcode: 'B07C'     // cmp.w #$<immediate>,d7
     },
+    {
+        instruction: 'cmpi.w',
+        existingOpcode: '0C40', // cmp.w #$<immediate>,d0
+        newOpcode: 'B07C'     // cmp.w #$<immediate>,d7
+    },
+    {
+        instruction: 'cmp',
+        existingOpcode: '0C40', // cmp.w #$<immediate>,d0
+        newOpcode: 'B07C'     // cmp.w #$<immediate>,d7
+    },
     // Add more entries as needed, e.g.:
     /*
     {
