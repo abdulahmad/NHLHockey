@@ -15,8 +15,28 @@ const opcodeReplacements = [
     },
     {
         instruction: 'cmp',
-        existingOpcode: '0C40', // cmp #<immediate>,d0
-        newOpcode: 'B07C'      // cmp #<immediate>,d7
+        existingOpcode: '0C40',
+        newOpcode: 'B07C'
+    },
+    {
+        instruction: 'cmp',
+        existingOpcode: '0C41',
+        newOpcode: 'B27C'
+    },
+    {
+        instruction: 'ecg',
+        existingOpcode: 'C34A',
+        newOpcode: 'C549'
+    },
+    {
+        instruction: 'cmpi.l',
+        existingOpcode: '0C80',
+        newOpcode: 'B0BC'
+    },
+    {
+        instruction: 'cmp',
+        existingOpcode: '0C42',
+        newOpcode: 'B47C'
     },
     // Add more entries as needed
 ];

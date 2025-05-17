@@ -281,7 +281,7 @@ getlchoice2	;a2 = team for choice
 	dc.b	5,6,-1	;line 4
 	dc.b	5,6,-1	;line 5
 	dc.b	6,5,-1	;line 6
-	dc.b	$FF
+	dc.b	$01 ; AA TEST REV A
 
 lineinput	;process input for line changes
 	;d1 = new button presses
