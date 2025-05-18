@@ -3,7 +3,6 @@
 ; Likely a security/validation routine followed by VDP initialization or error state
 ; Absent in dev version, suggesting anti-piracy or retail-specific functionality
 
-            ORG     $7FE8A       ; Start at ROM offset 0x7FE8A
 SecurityCheck:
             DC.W    $FFFF        ; Padding, marker, or data (not a valid instruction)
 
@@ -29,7 +28,7 @@ ValidationLoop:
 
 VDPErrorSetup:
             ; Likely an error state (e.g., failed checksum) or final VDP init
-            MOVEA.L #$C00004, A4 ; Load VDP control port ($C00004)
+            MOVEA.L #Vctrl, A4 ; Load VDP control port ($C00004)
             MOVE.W  #$8F02, (A4)  ; Set VDP auto-increment to 2
             MOVE.W  #$8004, (A4)  ; Set VDP mode (disable H-blank, set mode)
             MOVE.W  #$8700, (A4)  ; Set background color (palette 0, entry 0)
@@ -39,7 +38,7 @@ VDPErrorSetup:
             ; MOVE.W  #$0E, D0     ; Value to write to VRAM
 
 VRAMWriteLoop:
-            MOVE.W  #$0E, $C00000  ; Write $0E to VDP data port ($C00000)
+            MOVE.W  #$0E, Vdata  ; Write $0E to VDP data port ($C00000)
             DBF     D1, VRAMWriteLoop ; Loop until D1 = -1
 
 Halt:

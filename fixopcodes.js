@@ -11,10 +11,13 @@ const opcodeReplacements = [
     { instruction: 'cmp', existingOpcode: '0C42', newOpcode: 'B47C' },
     { instruction: 'cmp', existingOpcode: '0C43', newOpcode: 'B67C' },
     { instruction: 'cmp', existingOpcode: '0C44', newOpcode: 'B87C' },
+    { instruction: 'cmp', existingOpcode: '0C45', newOpcode: 'BA7C' },
     { instruction: 'cmp', existingOpcode: '0C46', newOpcode: 'BC7C' },
+    { instruction: 'cmp', existingOpcode: '0C47', newOpcode: 'BE7C' },
     { instruction: 'cmpi.l', existingOpcode: '0C80', newOpcode: 'B0BC' },
     { instruction: 'cmp.l', existingOpcode: '0C80', newOpcode: 'B0BC' },
     { instruction: 'cmpi.l', existingOpcode: '0C81', newOpcode: 'B2BC' },
+    { instruction: 'cmpi.l', existingOpcode: '0C83', newOpcode: 'B6BC' },
     { instruction: 'exg', existingOpcode: 'C34A', newOpcode: 'C549', operandCondition: (operands) => /^\s*a2\s*,\s*a1\s*$/.test(operands) },
     { instruction: 'exg', existingOpcode: 'C141', newOpcode: 'C340', operandCondition: (operands) => /^\s*d1\s*,\s*d0\s*$/.test(operands) },
     // do not change: exg	d0,d1
@@ -38,6 +41,11 @@ async function parseListingFile(lines, opcodeReplacements) {
 
 
         for (const line of lines) {
+            if (/\s*incbin\s+Sound\\Hockey\.snd/i.test(line)) {
+                console.log(`Hit incbin directive, stopping scan for ${instruction}`);
+                break;       // stop processing any more lines for this replacement
+            }
+
             const match = line.match(regex);
             if (match) {
                 // Extract fields from the regex match
