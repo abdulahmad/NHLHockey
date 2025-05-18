@@ -3351,7 +3351,7 @@ sublist
 
 priolist	dc.b	0,1,2,4,3,5,6	;positions in order of importance
 
-	dc.b $FF
+	dc.b $E7 ; Rev A
 ;--------------------------------------------------------------
 
 forcepldata	;no skating on/off force players to correct data (for faceoffs only)
@@ -3413,7 +3413,7 @@ Setplass	;set players (a3) initial assignment
 	dc.b	acenterd
 	dc.b	awingd
 	dc.b	acenterd
-	dc.b	$FF
+	dc.b	$7C ; Rev A AA TEST
 
 setplayer	;bring player onto the ice and set his stats
 ;d3 = player number
@@ -3827,7 +3827,7 @@ PlayoffScreen
 
 .pli
     ;String	
-	String $D4 ; Had to pass $D4 as a parameter to the String macro to match orignal rom						
+	String $F0 ; Rev A AA TEST
 	String	'                    '
 	String	'  Press [ to page   '
 	String	'  Press ] to page   '
@@ -3941,7 +3941,7 @@ PlayoffScreen
 	dc.b	58,23
 	dc.b	5,13,0,28,2,43,4,83,6,98,8,113,10
 	dc.b	-1
-	dc.b	$FF
+	dc.b	$0
 
 ScoutingReport
 	;bring up graphic for scouting report screen
@@ -5497,7 +5497,7 @@ PWprint	;print pass word (from PassWord
 
 PasstoText	;chars used in password text
 	dc.b	'BCDFGHJKLMNPRSTVWXYZ0123456789-'
-	dc.b $FF
+	dc.b $7C
 
 ResetPassWord	;copy '-' char into password
 	move.l	#PassWord,a0
