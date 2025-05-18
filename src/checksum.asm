@@ -8,22 +8,23 @@ SecurityCheck:
 
 ValidationRoutine:
             MOVEQ   #0, D0       ; Clear D0 (initialize checksum or accumulator)
-            SUB.L   D0, A0       ; Normalize A0 (subtract D0 from address register)
-            MOVE.L  #$1FFA3, A1  ; Load address $1FFA3 into A1 (data pointer?)
+            SUBA.L   A0, A0       ; Normalize A0 (subtract D0 from address register)
+            MOVE.L  #$1FFA3, D1  ; Load address $1FFA3 into A1 (data pointer?)
+ValidationLoop:
             CMPA.W  #$18C, A0    ; Check if A0 equals $18C (memory boundary)
             BNE.S   SkipIncrement ; Branch if not equal
             ADDQ.W  #4, A0       ; Increment A0 by 4 (skip bytes or align)
             BRA.S   ContinueValidation ; Proceed to next step
 SkipIncrement:
-            ADD.L   (A0), D0     ; Accumulate value at A0 into D0
+            ADD.L   (A0)+, D0     ; Accumulate value at A0 into D0
 ContinueValidation:
-            SUBQ.L  #1, (A1)     ; Decrement counter at A1
+            SUBQ.L  #1, D1     ; Decrement counter at A1
             BGT.S   ValidationLoop ; Loop if counter > 0
             CMPI.L  #$9BB2FE9B, D0 ; Compare D0 with $9BB2FE9B (expected checksum?)
             BNE.S   VDPErrorSetup ; Branch to VDP setup if checksum fails
             RTS                  ; Return if validation passes
 
-ValidationLoop:
+; ValidationLoop:
             ; BRA.S   ValidationRoutine ; Loop back for next iteration
 
 VDPErrorSetup:
