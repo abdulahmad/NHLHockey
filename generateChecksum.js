@@ -1,5 +1,7 @@
 const fs = require('fs').promises;
 
+const endoffile = 0x7FE8A;
+const checksumoffset = 0x20; // insert checksum here
 async function calculateChecksums(romPath) {
     try {
         // Read the ROM file
@@ -25,7 +27,7 @@ async function calculateChecksums(romPath) {
         function calculate32BitChecksum() {
             let sum = 0n; // Use BigInt for 32-bit arithmetic
             // Process 32-bit longwords
-            for (let i = 0; i < 0x7FE8A; i += 4) {
+            for (let i = 0; i < endoffile; i += 4) {
                 // Skip 0x18C to 0x18F (4 bytes)
                 if (i === 0x18C) {
                     continue;
