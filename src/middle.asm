@@ -1005,7 +1005,7 @@ bfasciicon	;equates to find each char definition for bigfont.map
 	;	P  Q  R  S  T  U  V  W	X  Y  Z
 	dc.b	29,31,33,35,37,39,41,43,45,47,49
 	;
-	dc.b $FF
+	dc.b $49
 
 	
 

@@ -68,7 +68,7 @@ PenDatadelay	dc.w	$0000
 	dc.w	$1803,$1d01,-$1e0f
 
 PenDatawhistle	dc.w	$0000
-	String	' '
+	String	'',0 ; AA TEST Rev A
 	dc.w	-$1f0a
 
 

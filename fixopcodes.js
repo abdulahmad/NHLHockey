@@ -3,15 +3,22 @@ const path = require('path');
 
 // Define the opcode replacement table
 const opcodeReplacements = [
+    { instruction: 'cmp', existingOpcode: '0C00', newOpcode: 'B03C' },
     { instruction: 'cmp.w', existingOpcode: '0C40', newOpcode: 'B07C' },
     { instruction: 'cmpi.w', existingOpcode: '0C40', newOpcode: 'B07C' },
     { instruction: 'cmp', existingOpcode: '0C40', newOpcode: 'B07C' },
     { instruction: 'cmp', existingOpcode: '0C41', newOpcode: 'B27C' },
-    { instruction: 'exg', existingOpcode: 'C34A', newOpcode: 'C549', operandCondition: (operands) => /^\s*a2\s*,\s*a1\s*$/.test(operands) },
-    { instruction: 'cmpi.l', existingOpcode: '0C80', newOpcode: 'B0BC' },
-    { instruction: 'cmpi.l', existingOpcode: '0C81', newOpcode: 'B2BC' },
-    { instruction: 'cmp', existingOpcode: '0C42', newOpcode: 'B47C' }, // Matches your line
+    { instruction: 'cmp', existingOpcode: '0C42', newOpcode: 'B47C' },
     { instruction: 'cmp', existingOpcode: '0C43', newOpcode: 'B67C' },
+    { instruction: 'cmp', existingOpcode: '0C44', newOpcode: 'B87C' },
+    { instruction: 'cmp', existingOpcode: '0C46', newOpcode: 'BC7C' },
+    { instruction: 'cmpi.l', existingOpcode: '0C80', newOpcode: 'B0BC' },
+    { instruction: 'cmp.l', existingOpcode: '0C80', newOpcode: 'B0BC' },
+    { instruction: 'cmpi.l', existingOpcode: '0C81', newOpcode: 'B2BC' },
+    { instruction: 'exg', existingOpcode: 'C34A', newOpcode: 'C549', operandCondition: (operands) => /^\s*a2\s*,\s*a1\s*$/.test(operands) },
+    { instruction: 'exg', existingOpcode: 'C141', newOpcode: 'C340', operandCondition: (operands) => /^\s*d1\s*,\s*d0\s*$/.test(operands) },
+    // do not change: exg	d0,d1
+    // do change: exg	d1,d0
 ];
 
 // Function to parse the .lst file
