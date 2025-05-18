@@ -30,3 +30,4 @@ language.dat
 *.gs*
 package-lock.json
 node_modules/
+Extracted/

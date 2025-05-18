@@ -27,13 +27,14 @@ const assets = [
     { name: 'EASN.map.jim', folder: 'Graphics', start: 0x0007FC20, end: 0x0007FE8A }
 ];
 
-// Expected CRC32 checksum (2641653F in hexadecimal)
-const EXPECTED_CRC32 = 0x2641653F;
+// Expected CRC32 checksum (996931775 in hexadecimal)
+const EXPECTED_CRC32 = 0x3B6BF8BF;
 
 async function verifyCRC32(filePath) {
     try {
         const data = await fs.readFile(filePath);
         const calculatedCRC = crc32.buf(data) >>> 0; // Convert to unsigned 32-bit integer
+        console.log('Caclulated CRC32:', calculatedCRC, EXPECTED_CRC32);
         return calculatedCRC === EXPECTED_CRC32;
     } catch (error) {
         console.error(`Error reading ROM file for CRC32 check: ${error.message}`);
@@ -46,7 +47,7 @@ async function extractAssets(romPath) {
         // Verify CRC32
         const isValid = await verifyCRC32(romPath);
         if (!isValid) {
-            console.error('CRC32 checksum mismatch. Expected 2641653F. Aborting extraction.');
+            console.error('CRC32 checksum mismatch. Expected 3B6BF8BF. Aborting extraction.');
             return;
         }
 
