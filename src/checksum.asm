@@ -24,9 +24,6 @@ ContinueValidation:
             BNE.S   VDPErrorSetup ; Branch to VDP setup if checksum fails
             RTS                  ; Return if validation passes
 
-; ValidationLoop:
-            ; BRA.S   ValidationRoutine ; Loop back for next iteration
-
 VDPErrorSetup:
             ; Likely an error state (e.g., failed checksum) or final VDP init
             MOVEA.L #Vctrl, A4 ; Load VDP control port ($C00004)

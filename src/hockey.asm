@@ -5194,7 +5194,7 @@ EncodePW	;after playoff game compute winners and password if needed
 	bsr	WritePassBits
 	bsr	BitstoPW
 	btst	#sf3alttree,sflags3
-	beq	MakeTree
+	beq	rtss ; Rev A AA Test
 	move.l	tpassbits,passbits	;passbits befor all games resolved
 	move.l	tpassbits+4,passbits+4
 	move.l	tpassbits+8,passbits+8
