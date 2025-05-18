@@ -28,3 +28,5 @@ Gens.cfg
 language.dat
 *.srm
 *.gs*
+package-lock.json
+node_modules/
