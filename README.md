@@ -67,3 +67,10 @@ docker run --rm \
 - update readme.md
 - Extract .jim files?
 - Extract .snd file
+
+create me a package.json where I can do the following:
+
+npm run extractassets -> runs "node extractAssets.js nhl92retail.bin"
+npm run build:retail -> runs 'set rev=0 && set security=1 &&build.bat && node fixopcodes.js "output\nhl92 .lst" output\nhl92.bin'
+npm run build:reva -> runs 'set rev=1 && set security=1 &&build.bat && node fixopcodes.js "output\nhl92 .lst" output\nhl92.bin'
+npm run build:dev -> runs 'set rev=1 && set security=0 &&build.bat'
