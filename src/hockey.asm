@@ -5539,7 +5539,11 @@ PWprint	;print pass word (from PassWord
 
 PasstoText	;chars used in password text
 	dc.b	'BCDFGHJKLMNPRSTVWXYZ0123456789-'
-	dc.b $7C
+	IF REV=0 ; RETAIL
+		dc.b $7C
+	ELSE ; REV A
+		dc.b $FF
+	ENDIF
 
 ResetPassWord	;copy '-' char into password
 	move.l	#PassWord,a0
@@ -5700,10 +5704,10 @@ Stanleymap
 EASNmap
 	incbin ..\Extracted\Graphics\EASN.map.jim
 	even
-	
-	include checksum.asm
-
-	dcb.b   0x124,$FF
+	IF CHECKSUM=1 ; Security Code used during Mastering of Retail Cartridge
+		include checksum.asm
+		dcb.b   0x124,$FF
+	ENDIF
 endofcart
    	end
 

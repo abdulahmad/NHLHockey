@@ -1335,7 +1335,11 @@ Credits
 	String	-1
 
 	String	'Special Thanks to'
-	String	'Mark Hughes and Scooter Hanson'
+	IF REV=0 ; RETAIL
+		String	'Mark Hughes and Scooter Hanson'
+	ELSE ; REV A
+		String	'Mark Hughes and Scooter Henson'
+	ENDIF
 	String	'of the San Diego Gulls'
 
 	String	''
