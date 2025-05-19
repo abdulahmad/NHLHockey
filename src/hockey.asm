@@ -24,7 +24,7 @@ Begin
 		move	#$2700,SR	
 		move.l	#Stack,sp	
 		move.l	#varstart,a0	;clear out ram
-	.1	clr.l	(a0)+
+.1		clr.l	(a0)+
 		cmp.l	#varend,a0
 		blt	.1
 	ENDIF
@@ -463,7 +463,6 @@ Pausemode	;game is in pause mode now
 	rts
 
 .gnum	cmp	#3,d0	;print goalie number or none /d0 = menu item
-	cmp #3,d0
 	bne	rtss
 	move.l	a1,-(a7)
 	sub	#6,printx
@@ -3571,7 +3570,7 @@ Opening2
 		move	#$2700,SR
 		move	#Stack,sp
 		move	#varstart,a0
-	.0	clr.l	(a0)+
+.0		clr.l	(a0)+
 		cmp	#varend,a0
 		blt	.0
 		move.l	#vb2,vbint
