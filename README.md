@@ -58,4 +58,12 @@ docker run --rm \
 1. For more detailed development information, please refer to the [wiki](https://github.com/Mhopkinsinc/NHLHockey/wiki).
 
 
-Code is aligned up to ED52
+## TODO:
+- Add Security = 0,1 (default) flags
+- Add Revision = 0 (default), 1 flags
+- Move to use extracted assets
+- Start adding revision code branches
+- Add security logic
+- update readme.md
+- Extract .jim files?
+- Extract .snd file
