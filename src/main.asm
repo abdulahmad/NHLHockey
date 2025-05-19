@@ -76,7 +76,7 @@ Start
 			rte
 		Spurious:
 			rte
-	ELSE ; REVA
+	ELSE ; REV A
 		HBlank:
 		Spurious:	
 			rte

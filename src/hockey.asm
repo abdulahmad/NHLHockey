@@ -11,6 +11,7 @@ Begin
 .0	clr.l	(a0)+
 	cmp.l	#varend2,a0
 	blt	.0
+
 	jsr	ResetPassWord	
 	jsr	DefaultMenus		;set initial menu choices
 	jsr	orjoy				;clear any previous button presses
@@ -18,13 +19,16 @@ Begin
 	jsr	p_turnoff			;sound stuff
 	jsr	p_music_vblank		;sound stuff
 	jsr	KillCrowd	
-	move	#$2700,SR	
-	move.l	#Stack,sp	
-	move.l	#varstart,a0	;clear out ram
-
-.1	clr.l	(a0)+
-	cmp.l	#varend,a0 ; AA TEST Rev A change
-	blt	.1
+	
+	IF REV=0 ; RETAIL
+		move	#$2700,SR	
+		move.l	#Stack,sp	
+		move.l	#varstart,a0	;clear out ram
+	.1	clr.l	(a0)+
+		cmp.l	#varend,a0
+		blt	.1
+	ENDIF
+	
 	jmp	Opening				;goto title screen and options etc.
 ;----------------------------------------------------
 
@@ -186,7 +190,7 @@ updatecrowdf	;this is called every game loop with d7 = elapsed frames
 	bpl	.cf
 	move	crowdlevel,d0
 	lsr	#1,d0
-	cmp.w #$007F,d0
+	cmp #127,d0
 	bls	.1
 	moveq	#127,d0
 .1	and	#%01100000,d0
@@ -458,7 +462,7 @@ Pausemode	;game is in pause mode now
 	addq.w	#2,a7
 	rts
 
-.gnum	;print goalie number or none /d0 = menu item
+.gnum	cmp	#3,d0	;print goalie number or none /d0 = menu item
 	cmp #3,d0
 	bne	rtss
 	move.l	a1,-(a7)
@@ -3351,7 +3355,11 @@ sublist
 
 priolist	dc.b	0,1,2,4,3,5,6	;positions in order of importance
 
-	dc.b $E7 ; Rev A
+	IF REV=0 ; RETAIL
+		dc.b $E7
+	ELSE ; REV A
+		dc.b $FF
+	ENDIF
 ;--------------------------------------------------------------
 
 forcepldata	;no skating on/off force players to correct data (for faceoffs only)
@@ -3413,7 +3421,11 @@ Setplass	;set players (a3) initial assignment
 	dc.b	acenterd
 	dc.b	awingd
 	dc.b	acenterd
-	dc.b	$7C ; Rev A AA TEST
+	IF REV=0 ; RETAIL
+		dc.b	$7C
+	ELSE ; REV A
+		dc.b	$FF
+	ENDIF
 
 setplayer	;bring player onto the ice and set his stats
 ;d3 = player number
@@ -3547,17 +3559,24 @@ GameOver
 	bra	Opening4
 
 Opening	
-	; bsr	KillCrowd	AA TEST
+	IF REV=1 ; REV A
+		bsr	KillCrowd
+	ENDIF
 	bsr	TitleScreen	
 
-Opening2	;move	#$2700,SR
-	move.l	#Stack,sp
-; 	move	#varstart,a0 AA TEST
-; .0	clr.l	(a0)+
-; 	cmp	#varend,a0
-; 	blt	.0
-; 	move.l	#vb2,vbint
-; 	move	#$2500,sr
+Opening2
+	IF REV=0 ; RETAIL
+		move.l	#Stack,sp
+	ELSE ; REV A
+		move	#$2700,SR
+		move	#Stack,sp
+		move	#varstart,a0
+	.0	clr.l	(a0)+
+		cmp	#varend,a0
+		blt	.0
+		move.l	#vb2,vbint
+		move	#$2500,sr
+	ENDIF
 	bsr	setoptions
 Opening3	bsr	PlayoffScreen
 Opening4	bsr	ScoutingReport
@@ -3827,7 +3846,11 @@ PlayoffScreen
 
 .pli
     ;String	
-	String $F0 ; Rev A AA TEST
+	IF REV=0 ; RETAIL
+		String $F0
+	ELSE ; REV A
+		String $D4 ; Had to pass $D4 as a parameter to the String macro to match orignal rom	
+	ENDIF
 	String	'                    '
 	String	'  Press [ to page   '
 	String	'  Press ] to page   '
@@ -3941,8 +3964,12 @@ PlayoffScreen
 	dc.b	58,23
 	dc.b	5,13,0,28,2,43,4,83,6,98,8,113,10
 	dc.b	-1
-	dc.b	$0
-
+	IF REV=0 ; RETAIL
+		dc.b	$0
+	ELSE ; REV A
+		dc.b	$FF
+	ENDIF
+	
 ScoutingReport
 	;bring up graphic for scouting report screen
 	bsr	SetTeams
@@ -4397,9 +4424,14 @@ TitleScreen
 
 setoptions
 	;options screen display and input
-	; move	#$2500,sr
-	bset	#dfng,disflags
-	move.l	#vb2,vbint
+	IF REV=0 ; RETAIL
+		bset	#dfng,disflags
+		move.l	#vb2,vbint
+	ELSE ; REV A
+		move	#$2500,sr
+		move.l	#vb2,vbint
+		bset	#dfng,disflags
+	ENDIF
 	bclr	#df32c,disflags
 	move	#$0000,VSCRLPM
 	move	#$b400,VSPRITES
@@ -5186,15 +5218,21 @@ EncodePW	;after playoff game compute winners and password if needed
 	bpl	.nofail	;player 1 won
 	cmp	#2,POJoy
 	blt	.userfailed	;one player or teammates
-	; cmp	#1,gamelevel AA TEST added to Rev A
-	; bne	.userfailed AA TEST added to Rev A
+	IF REV=1 ; REV A
+		blt	.userfailed	;one player or teammates
+		cmp	#1,gamelevel
+	ENDIF
 	eor	#1,POTreeTeam	;switch teams if 2 player playoffs and cont 2 won first game
 	eor	#1,POJoy
 .nofail
 	bsr	WritePassBits
 	bsr	BitstoPW
 	btst	#sf3alttree,sflags3
-	beq	rtss ; Rev A AA Test
+	IF REV=0 ; RETAIL
+		beq	rtss
+	ELSE ; REV A
+		beq	MakeTree
+	ENDIF
 	move.l	tpassbits,passbits	;passbits befor all games resolved
 	move.l	tpassbits+4,passbits+4
 	move.l	tpassbits+8,passbits+8
@@ -5448,10 +5486,12 @@ ResolveGames	;compute winners and losers for playoff matchups
 	clr	gspobwins(a0)
 	sub	#gssize,a0
 	dbf	d1,.nr0
-	; moveq	#1,d1 AA TEST Rev A adds this
-	; asl	d2,d1
-	; sub	#1,d1
-	; and	d1,WinBits
+	IF REV=1 ; REV A
+		moveq	#1,d1
+		asl	d2,d1
+		sub	#1,d1
+		and	d1,WinBits
+	ENDIF
 	asl	d2,d3
 	or	d3,WinBits
 	add	#1,gamelevel
@@ -5468,10 +5508,12 @@ ResolveGames	;compute winners and losers for playoff matchups
 	bchg	d1,d3
 .nb2	sub	#gssize,a0
 	dbf	d1,.nb0
-	; moveq	#1,d1 AA TEST Rev A adds this
-	; asl	d2,d1
-	; sub	#1,d1
-	; and	d1,WinBits
+	IF REV=1 ; REV A
+		moveq	#1,d1
+		asl	d2,d1
+		sub	#1,d1
+		and	d1,WinBits
+	ENDIF
 	asl	d2,d3
 	or	d3,WinBits
 	add	#1,gamelevel
