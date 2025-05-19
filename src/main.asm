@@ -71,7 +71,13 @@ Start
 
 	bra	Begin
 
-HBlank:	
-	rte
-Spurious:
-	rte
+	IF REV=0 ; RETAIL
+		HBlank:	
+			rte
+		Spurious:
+			rte
+	ELSE ; REVA
+		HBlank:
+		Spurious:	
+			rte
+	ENDIF
