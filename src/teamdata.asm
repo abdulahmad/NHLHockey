@@ -44,8 +44,8 @@ Boston
 .sodds	dc.b	3,4
 
 .pad
-	incbin Graphics\Pals\Bruinsh.pal
-	incbin Graphics\Pals\Bruinsv.pal
+	incbin ..\Extracted\Graphics\Pals\Bruinsh.pal
+	incbin ..\Extracted\Graphics\Pals\Bruinsv.pal
 
 .ls
 	;goalie,defl,defr,wingl,center,wingr
@@ -117,8 +117,8 @@ Buffalo
 .sodds	dc.b	3,4
 
 .pad
-	incbin Graphics\Pals\sabresh.pal
-	incbin Graphics\Pals\sabresv.pal
+	incbin ..\Extracted\Graphics\Pals\sabresh.pal
+	incbin ..\Extracted\Graphics\Pals\sabresv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -166,8 +166,8 @@ Calgary
 .sodds	dc.b	0,4
 
 .pad
-	incbin Graphics\Pals\flamesh.pal
-	incbin Graphics\Pals\flamesv.pal
+	incbin ..\Extracted\Graphics\Pals\flamesh.pal
+	incbin ..\Extracted\Graphics\Pals\flamesv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -217,8 +217,8 @@ Chicago
 .sodds	dc.b	3,7
 
 .pad
-	incbin Graphics\Pals\blackhawksh.pal
-	incbin Graphics\Pals\blackhawksv.pal
+	incbin ..\Extracted\Graphics\Pals\blackhawksh.pal
+	incbin ..\Extracted\Graphics\Pals\blackhawksv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -268,8 +268,8 @@ Detroit
 .sodds	dc.b	4,3
 
 .pad
-	incbin Graphics\Pals\Redwingsh.pal
-	incbin Graphics\Pals\Redwingsv.pal
+	incbin ..\Extracted\Graphics\Pals\Redwingsh.pal
+	incbin ..\Extracted\Graphics\Pals\Redwingsv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -320,8 +320,8 @@ Edmonton
 .sodds	dc.b	4,4
 
 .pad
-	incbin Graphics\Pals\oilersh.pal
-	incbin Graphics\Pals\oilersv.pal
+	incbin ..\Extracted\Graphics\Pals\oilersh.pal
+	incbin ..\Extracted\Graphics\Pals\oilersv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -370,8 +370,8 @@ Hartford
 .sodds	dc.b	5,4
 
 .pad
-	incbin Graphics\Pals\whalersh.pal
-	incbin Graphics\Pals\whalersv.pal
+	incbin ..\Extracted\Graphics\Pals\whalersh.pal
+	incbin ..\Extracted\Graphics\Pals\whalersv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -417,8 +417,8 @@ LosAngeles
 .sodds	dc.b	0,5
 
 .pad
-	incbin Graphics\Pals\Kingsh.pal
-	incbin Graphics\Pals\Kingsv.pal
+	incbin ..\Extracted\Graphics\Pals\Kingsh.pal
+	incbin ..\Extracted\Graphics\Pals\Kingsv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -467,8 +467,8 @@ Minnesota
 .sodds	dc.b	5,4
 
 .pad
-	incbin Graphics\Pals\northstarsh.pal
-	incbin Graphics\Pals\northstarsv.pal
+	incbin ..\Extracted\Graphics\Pals\northstarsh.pal
+	incbin ..\Extracted\Graphics\Pals\northstarsv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -517,8 +517,8 @@ Montreal
 .sodds	dc.b	4,5
 
 .pad
-	incbin Graphics\Pals\canadiensh.pal
-	incbin Graphics\Pals\canadiensv.pal
+	incbin ..\Extracted\Graphics\Pals\canadiensh.pal
+	incbin ..\Extracted\Graphics\Pals\canadiensv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -565,8 +565,8 @@ NewJersey
 .sodds	dc.b	4,4
 
 .pad
-	incbin Graphics\Pals\devilsh.pal
-	incbin Graphics\Pals\devilsv.pal
+	incbin ..\Extracted\Graphics\Pals\devilsh.pal
+	incbin ..\Extracted\Graphics\Pals\devilsv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -615,8 +615,8 @@ NewYorkI
 .sodds	dc.b	6,3
 
 .pad
-	incbin Graphics\Pals\islandersh.pal
-	incbin Graphics\Pals\islandersv.pal
+	incbin ..\Extracted\Graphics\Pals\islandersh.pal
+	incbin ..\Extracted\Graphics\Pals\islandersv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -664,8 +664,8 @@ NewYorkR
 .sodds	dc.b	3,4
 
 .pad
-	incbin Graphics\Pals\rangersh.pal
-	incbin Graphics\Pals\rangersv.pal
+	incbin ..\Extracted\Graphics\Pals\rangersh.pal
+	incbin ..\Extracted\Graphics\Pals\rangersv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -714,8 +714,8 @@ Philadelphia
 .sodds	dc.b	5,4
 
 .pad
-	incbin Graphics\Pals\flyersh.pal
-	incbin Graphics\Pals\flyersv.pal
+	incbin ..\Extracted\Graphics\Pals\flyersh.pal
+	incbin ..\Extracted\Graphics\Pals\flyersv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -764,8 +764,8 @@ Pittsburgh
 .sodds	dc.b	0,2
 
 .pad
-	incbin Graphics\Pals\penguinsh.pal
-	incbin Graphics\Pals\penguinsv.pal
+	incbin ..\Extracted\Graphics\Pals\penguinsh.pal
+	incbin ..\Extracted\Graphics\Pals\penguinsv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -813,8 +813,8 @@ Quebec
 .sodds	dc.b	6,0
 
 .pad
-	incbin Graphics\Pals\nordiquesh.pal
-	incbin Graphics\Pals\nordiquesv.pal
+	incbin ..\Extracted\Graphics\Pals\nordiquesh.pal
+	incbin ..\Extracted\Graphics\Pals\nordiquesv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -862,8 +862,8 @@ SanJose
 .sodds	dc.b	6,1
 
 .pad
-	incbin Graphics\Pals\Sharksh.pal
-	incbin Graphics\Pals\Sharksv.pal
+	incbin ..\Extracted\Graphics\Pals\Sharksh.pal
+	incbin ..\Extracted\Graphics\Pals\Sharksv.pal
 .ls
 	dc.b	01,05,14,19,03,17,11,0	;line 1
 	dc.b	01,09,06,18,11,12,03,0	;line 2
@@ -911,8 +911,8 @@ StLouis
 .sodds	dc.b	2,5
 
 .pad
-	incbin Graphics\Pals\bluesh.pal
-	incbin Graphics\Pals\bluesv.pal
+	incbin ..\Extracted\Graphics\Pals\bluesh.pal
+	incbin ..\Extracted\Graphics\Pals\bluesv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -959,8 +959,8 @@ Toronto
 .sodds	dc.b	5,1
 
 .pad
-	incbin Graphics\Pals\mapleleafsh.pal
-	incbin Graphics\Pals\mapleleafsv.pal
+	incbin ..\Extracted\Graphics\Pals\mapleleafsh.pal
+	incbin ..\Extracted\Graphics\Pals\mapleleafsv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -1008,8 +1008,8 @@ Vancouver
 .sodds	dc.b	5,2
 
 .pad
-	incbin Graphics\Pals\canucksh.pal
-	incbin Graphics\Pals\canucksv.pal
+	incbin ..\Extracted\Graphics\Pals\canucksh.pal
+	incbin ..\Extracted\Graphics\Pals\canucksv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -1059,8 +1059,8 @@ Washington
 .sodds	dc.b	5,5
 
 .pad
-	incbin Graphics\Pals\capitalsh.pal
-	incbin Graphics\Pals\capitalsv.pal
+	incbin ..\Extracted\Graphics\Pals\capitalsh.pal
+	incbin ..\Extracted\Graphics\Pals\capitalsv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -1107,8 +1107,8 @@ Winnipeg
 .sodds	dc.b	5,3
 
 .pad
-	incbin Graphics\Pals\jetsh.pal
-	incbin Graphics\Pals\jetsv.pal
+	incbin ..\Extracted\Graphics\Pals\jetsh.pal
+	incbin ..\Extracted\Graphics\Pals\jetsv.pal
 .ls
 	dc.b	01,04,05,06,03,07,08,0	;line 1
 	dc.b	01,09,10,11,08,12,03,0	;line 2
@@ -1157,8 +1157,8 @@ Campbell
 .sodds	dc.b	0,0
 
 .pad
-	incbin Graphics\Pals\Campbellh.pal
-	incbin Graphics\Pals\Campbellv.pal
+	incbin ..\Extracted\Graphics\Pals\Campbellh.pal
+	incbin ..\Extracted\Graphics\Pals\Campbellv.pal
 .ls
 	dc.b	01,03,07,17,20,13,10,0	;line
 	dc.b	01,05,06,09,10,08,20,0	;line
@@ -1204,8 +1204,8 @@ Wales
 .sodds	dc.b	0,0
 
 .pad
-	incbin Graphics\Pals\Walesh.pal
-	incbin Graphics\Pals\Walesv.pal
+	incbin ..\Extracted\Graphics\Pals\Walesh.pal
+	incbin ..\Extracted\Graphics\Pals\Walesv.pal
 .ls
 	dc.b	01,20,06,15,21,07,09,0	;line
 	dc.b	01,05,03,16,14,09,07,0	;line

@@ -5595,68 +5595,68 @@ p_initialZ80	equ	(*+4)
 p_initune	equ	(*+8)
 p_turnoff	equ	(*+12)
 p_initfx	equ	(*+16)
-	incbin Sound\Hockey.snd
+	incbin ..\Extracted\Sound\Hockey.snd
 	even
 
 GameSetUpMap
-	incbin Graphics\GameSetUp.map.jim
+	incbin ..\Extracted\Graphics\GameSetUp.map.jim
 	even
 Title1Map
-	incbin Graphics\Title1.map.jim
+	incbin ..\Extracted\Graphics\Title1.map.jim
 	even
 Title2Map
-	incbin Graphics\Title2.map.jim
+	incbin ..\Extracted\Graphics\Title2.map.jim
 	even
 NHLSpinMap
-	incbin Graphics\NHLSpin.map.jim
+	incbin ..\Extracted\Graphics\NHLSpin.map.jim
 	even
 PuckSprites
-	incbin Graphics\Puck.anim
+	incbin ..\Extracted\Graphics\Puck.anim
 	even
 ScoutMap
-	incbin Graphics\Scouting.map.jim
+	incbin ..\Extracted\Graphics\Scouting.map.jim
 	even
 FramerMap
-	incbin Graphics\Framer.map.jim
+	incbin ..\Extracted\Graphics\Framer.map.jim
 	even
 FaceOffMap
-	incbin Graphics\FaceOff.map.jim
+	incbin ..\Extracted\Graphics\FaceOff.map.jim
 	even	
 IceRinkMap
-	incbin Graphics\IceRink.map.jim
+	incbin ..\Extracted\Graphics\IceRink.map.jim
 	even
 RefsMap
-	incbin Graphics\Refs.map.jim
+	incbin ..\Extracted\Graphics\Refs.map.jim
 	even
 Sprites
-	incbin Graphics\Sprites.anim
+	incbin ..\Extracted\Graphics\Sprites.anim
 	even
 CrowdSprites
-	incbin Graphics\Crowd.anim
+	incbin ..\Extracted\Graphics\Crowd.anim
 	even
 FaceOffSprites
-	incbin Graphics\FaceOff.anim
+	incbin ..\Extracted\Graphics\FaceOff.anim
 	even
 ZamSprites
-	incbin Graphics\Zam.anim
+	incbin ..\Extracted\Graphics\Zam.anim
 	even
 BigFontMap
-	incbin Graphics\BigFont.map.jim
+	incbin ..\Extracted\Graphics\BigFont.map.jim
 	even
 SmallFontMap
-	incbin Graphics\SmallFont.map.jim
+	incbin ..\Extracted\Graphics\SmallFont.map.jim
 	even
 Teamblocksmap
-	incbin Graphics\TeamBlocks.map.jim
+	incbin ..\Extracted\Graphics\TeamBlocks.map.jim
 	even
 Arrowsmap
-	incbin Graphics\Arrows.map.jim
+	incbin ..\Extracted\Graphics\Arrows.map.jim
 	even
 Stanleymap
-	incbin Graphics\Stanley.map.jim
+	incbin ..\Extracted\Graphics\Stanley.map.jim
 	even
 EASNmap
-	incbin Graphics\EASN.map.jim
+	incbin ..\Extracted\Graphics\EASN.map.jim
 	even
 	
 	include checksum.asm
