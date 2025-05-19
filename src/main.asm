@@ -67,7 +67,7 @@ ErrorStatus
 Start
 	Include	sega\SegaInit.asm
 	jsr ValidationRoutine
-	incbin Graphics\EALogo.bin
+	incbin ..\Extracted\Graphics\EALogo.bin
 
 	bra	Begin
 

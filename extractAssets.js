@@ -4,6 +4,7 @@ const crc32 = require('crc-32'); // Requires 'crc-32' package: npm install crc-3
 
 // Asset definitions from the .lst file
 const assets = [
+    { name: 'EALogo.bin', folder: 'Graphics', start: 0x00000306, end: 0x00001164 },
     { name: 'Bruinsh.pal', folder: 'Graphics/Pals', start: 0x000011DA, end: 0x000011FA },
     { name: 'Bruinsv.pal', folder: 'Graphics/Pals', start: 0x000011FA, end: 0x0000121A },
     { name: 'sabresh.pal', folder: 'Graphics/Pals', start: 0x00001320, end: 0x00001340 },
@@ -76,7 +77,7 @@ const assets = [
 ];
 
 // Expected CRC32 checksum (996931775 in hexadecimal)
-const EXPECTED_CRC32 = 0x3B6BF8BF;
+const EXPECTED_CRC32 = 0x2641653F;
 
 async function verifyCRC32(filePath) {
     try {
