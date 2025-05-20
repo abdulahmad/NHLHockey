@@ -20,7 +20,11 @@ SkipIncrement:
 ContinueValidation:
             SUBQ.L  #1, D1     ; Decrement counter at A1
             BGT.S   ValidationLoop ; Loop if counter > 0
-            CMPI.L  #$9BB2FE9B, D0 ; Compare D0 with $9BB2FE9B (expected checksum?)
+            IF REV=0 ; RETAIL
+                CMPI.L  #$9BB2FE9B, D0 ; Compare D0 with $9BB2FE9B (expected checksum?)
+            ELSE ; REV A
+                CMPI.L  #$BB61BEF3, D0 ; Compare D0 with $9BB2FE9B (expected checksum?)
+            ENDIF
             BNE.S   VDPErrorSetup ; Branch to VDP setup if checksum fails
             RTS                  ; Return if validation passes
 

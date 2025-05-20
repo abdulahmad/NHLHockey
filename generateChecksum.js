@@ -61,5 +61,5 @@ async function calculateChecksums(romPath) {
 }
 
 // Example usage
-const romPath = 'output/modified_nhl92.bin'; // Replace with your ROM file path
+const romPath = 'output/nhl92.bin'; // Replace with your ROM file path
 calculateChecksums(romPath).catch(() => process.exit(1));
