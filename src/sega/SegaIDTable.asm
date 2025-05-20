@@ -13,7 +13,7 @@
 		IF REV=0 ; RETAIL
 			dc.w	$93B8				; 06	$18E	check sum data (installed by checsum program) (2 bytes)
 		ELSE ; REV A
-			dc.w	$FB95
+			dc.w	$18FC ; either FB95 or 18FC
 		ENDIF
 	ELSE ; Security check disabled
 		dc.w	$0000				; 06	$18E	check sum data (installed by checsum program) (2 bytes)

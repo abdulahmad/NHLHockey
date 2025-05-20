@@ -23,7 +23,7 @@ ContinueValidation:
             IF REV=0 ; RETAIL
                 CMPI.L  #$9BB2FE9B, D0 ; Compare D0 with $9BB2FE9B (expected checksum?)
             ELSE ; REV A
-                CMPI.L  #$BB61BEF3, D0 ; Compare D0 with $9BB2FE9B (expected checksum?)
+                CMPI.L  #$98580724, D0 ; either BB61BEF3 or 98580724
             ENDIF
             BNE.S   VDPErrorSetup ; Branch to VDP setup if checksum fails
             RTS                  ; Return if validation passes
