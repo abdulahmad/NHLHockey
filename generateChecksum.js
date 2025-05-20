@@ -50,8 +50,8 @@ async function calculateChecksums(romPath) {
         const checksum32 = calculate32BitChecksum();
 
         // Output results in hexadecimal
-        console.log(`16-bit Checksum (at 0x18E): 0x${checksum16.toString(16).padStart(4, '0').toUpperCase()}`);
-        console.log(`32-bit Checksum (expected 0x9BB2FE9B): 0x${checksum32.toString(16).padStart(8, '0').toUpperCase()}`);
+        console.log(`16-bit Checksum (at 0x18E): 0x${checksum16.toString(16).padStart(4, '0').toUpperCase()} <-- this should be generated against checksum=1 w/32-bit checksum updated`);
+        console.log(`32-bit Checksum: 0x${checksum32.toString(16).padStart(8, '0').toUpperCase()} <-- this should be generated against checksum=1`);
 
         return { checksum16, checksum32 };
     } catch (error) {

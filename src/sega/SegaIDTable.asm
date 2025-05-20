@@ -11,9 +11,9 @@
 	dc.b	'GM T-50236 -00'	; 05	$180	cartridge cat., product no., version no. (14 bytes)
 	IF CHECKSUM=1 ; Security check enabled
 		IF REV=0 ; RETAIL
-			dc.w	$93B8				; 06	$18E	check sum data (installed by checsum program) (2 bytes)
+			dc.w	$93B8		; 06	$18E	check sum data (installed by checsum program) (2 bytes)
 		ELSE ; REV A
-			dc.w	$18FC ; either FB95 or 18FC
+			dc.w	$3E24 		; 06	$18E	check sum data (installed by checsum program) (2 bytes)
 		ENDIF
 	ELSE ; Security check disabled
 		dc.w	$0000				; 06	$18E	check sum data (installed by checsum program) (2 bytes)

@@ -21,9 +21,9 @@ ContinueValidation:
             SUBQ.L  #1, D1     ; Decrement counter at A1
             BGT.S   ValidationLoop ; Loop if counter > 0
             IF REV=0 ; RETAIL
-                CMPI.L  #$9BB2FE9B, D0 ; Compare D0 with $9BB2FE9B (expected checksum?)
+                CMPI.L  #$9BB2FE9B, D0 ; Compare D0 with $9BB2FE9B (expected checksum)
             ELSE ; REV A
-                CMPI.L  #$98580724, D0 ; either BB61BEF3 or 98580724
+                CMPI.L  #$98580724, D0 ; Compare D0 with $98580724 (expected checksum)
             ENDIF
             BNE.S   VDPErrorSetup ; Branch to VDP setup if checksum fails
             RTS                  ; Return if validation passes
@@ -37,7 +37,6 @@ VDPErrorSetup:
             MOVE.W  #$8144, (A4)  ; Enable display, V-blank, DMA
             MOVE.W  #$C000, (A4)  ; Set VRAM write address to $0000
             MOVE.W  #$3F, D1     ; Set counter for 64 iterations
-            ; MOVE.W  #$0E, D0     ; Value to write to VRAM
 
 VRAMWriteLoop:
             MOVE.W  #$0E, Vdata  ; Write $0E to VDP data port ($C00000)
