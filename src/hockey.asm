@@ -4519,7 +4519,9 @@ setoptions
 	bsr	.ps
 	move	#24,palcount
 	bsr	forcefade
-	move.l #vb2,vbint
+	IF REV=0 ; RETAIL
+		move.l #vb2,vbint
+	ENDIF
 	bclr	#dfng,disflags	;fade in graphics now
 ;----------
 .top	;loop wait for input
@@ -5218,8 +5220,8 @@ EncodePW	;after playoff game compute winners and password if needed
 	cmp	#2,POJoy
 	blt	.userfailed	;one player or teammates
 	IF REV=1 ; REV A
-		blt	.userfailed	;one player or teammates
 		cmp	#1,gamelevel
+		bne    .userfailed
 	ENDIF
 	eor	#1,POTreeTeam	;switch teams if 2 player playoffs and cont 2 won first game
 	eor	#1,POJoy

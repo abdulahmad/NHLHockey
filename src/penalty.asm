@@ -68,11 +68,7 @@ PenDatadelay	dc.w	$0000
 	dc.w	$1803,$1d01,-$1e0f
 
 PenDatawhistle	dc.w	$0000
-	IF REV=0 ; RETAIL
-		String	'',0
-	ELSE ; REV A
-		String	' '
-	ENDIF
+	String	'',0
 	dc.w	-$1f0a
 
 

@@ -74,7 +74,14 @@ ErrorStatus
 	include	sega\SegaIDTable.asm
 Start
 	Include	sega\SegaInit.asm
-	jsr ValidationRoutine
+	IF CHECKSUM=1
+		jsr ValidationRoutine
+	ELSE
+		nop
+		nop
+		nop
+	ENDIF
+	
 	incbin ..\Extracted\Graphics\EALogo.bin
 
 	bra	Begin

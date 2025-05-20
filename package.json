@@ -8,7 +8,7 @@
     "fixopcodes": "node fixopcodes.js \"output\\nhl92 .lst\" output\\nhl92.bin",
     "build:retail": "set rev=0&& set checksum=1&& npm run asm && npm run fixopcodes",
     "build:reva": "set rev=1&& set checksum=1&& npm run asm && npm run fixopcodes",
-    "build:dev": "set rev=1&& set checksum=0&& npm run asm"
+    "build:dev": "set rev=1&& set checksum=0&& npm run asm && npm run fixopcodes"
   },
   "devDependencies": {
     "crc-32": "^1.2.2"
