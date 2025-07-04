@@ -41,7 +41,8 @@ async function parseListingFile(lines, opcodeReplacements) {
 
 
         for (const line of lines) {
-            if (/\s*incbin\s+..\\Extracted\\Sound\\Hockey\.snd/i.test(line)) {
+            // Use a platform-independent path comparison in regex
+            if (/\s*incbin\s+..[\\\/]Extracted[\\\/]Sound[\\\/]Hockey\.snd/i.test(line)) {
                 console.log(`Hit incbin directive, stopping scan for ${instruction}`);
                 break;       // stop processing any more lines for this replacement
             }
